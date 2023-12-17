@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital@0;1&display=swap');
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: poppins, sans-serif;
+}
+
+*::-webkit-scrollbar-track {
+  border: 5px solid white;
+	background-color: #b2bec3;
+}
+
+*::-webkit-scrollbar {
+	width: 10px;
+	background-color: #dfe6e9;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: #74b9ff;
+	border-radius: 10px;
+}
+
+body {
+  color: #202020;
+  position: relative;
+}
