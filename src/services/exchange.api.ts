@@ -16,7 +16,7 @@ const API_KEY: string = '25VQX1VBSB8O3VSM';
 const api: AxiosInstance = axios.create({
   baseURL: 'https://www.alphavantage.co',
   params: {
-    app_id: API_KEY
+    apikey: API_KEY
   },
   headers: {
     'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ export async function getCurrentExchange(baseCode: string, targetCode: string) {
     },
   });
 
-  return response;
+  return response.data['Realtime Currency Exchange Rate'];
 };
 
 export async function getDailyHistoryExchange(baseCode: string, targetCode: string) {
