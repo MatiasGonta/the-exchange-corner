@@ -16,16 +16,29 @@
 }
 
 *::-webkit-scrollbar {
-	width: 10px;
+  padding: 5px 0;
+	height: 10px;
 	background-color: #dfe6e9;
 }
 
 *::-webkit-scrollbar-thumb {
-	background-color: #74b9ff;
+	background-color: #14532d;
 	border-radius: 10px;
 }
 
-body {
-  color: #202020;
-  position: relative;
+.skeleton-fragment {
+  border-radius: 4px;
+  background: linear-gradient(90deg, #ccc 0px, rgb(229 229 229/90%) 40px, #ccc 80px);
+  background-size: 300%;
+  background-position: 100% 0;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
 }

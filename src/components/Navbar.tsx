@@ -4,7 +4,7 @@ import { Routes } from '@/models';
 
 interface NavbarInterface {
     currentPath: Routes;
-}
+} 
 
 const Navbar: React.FC<NavbarInterface> = ({ currentPath }) => {
     return (
