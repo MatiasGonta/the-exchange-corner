@@ -4,8 +4,9 @@ const xAxisStyles = 'w-1/4 max-w-[70px] h-full';
 
 export function DailyAreaChartSkeleton() {
     return (
-        <div className="w-full h-[380px] p-[24px] border border-[#e5e7eb] flex flex-col rounded-lg">
-            <div className="skeleton-fragment h-[28px]"></div>
+        <div className="w-full h-[405px] p-[24px] border border-[#e5e7eb] flex flex-col rounded-lg">
+            <div className="skeleton-fragment h-[35px] mb-[10px]"></div>
+            <div className="skeleton-fragment w-full max-w-[425px] h-[30px]"></div>
             <div className="w-[215px] h-[20px] my-[30px] flex items-center self-end">
                 <div className="skeleton-fragment w-[8px] h-[8px] rounded-full mr-[5px]"></div>
                 <div className="skeleton-fragment w-[200px] h-full"></div>

@@ -4,8 +4,8 @@ export function ExchangeRateDisplaySkeleton() {
             <div className="flex flex-col my-[20px]">
                 <div className="skeleton-fragment w-full max-w-[350px] h-[24px]"></div>
                 <div className="skeleton-fragment my-[15px] w-full max-w-[400px] h-[38px]"></div>
-                <div className="flex flex-col w-full max-w-[375px] h-[50px]">
-                    <div className="skeleton-fragment w-full h-full"></div>
+                <div className="flex flex-col w-full max-w-[375px] h-[55px]">
+                    <div className="skeleton-fragment w-full h-full mb-[5px]"></div>
                     <div className="skeleton-fragment w-full h-full"></div>
                 </div>
             </div>

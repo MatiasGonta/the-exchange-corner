@@ -78,10 +78,19 @@ const config: Config = {
           '100%': {
             backgroundPosition: '40px 40px',
           }
+        },
+        'barload': {
+          '0%': {
+            width: '100%',
+          },
+          '100%': {
+            width: '0',
+          }
         }
       },
       animation: {
         'move': 'move 4s linear infinite',
+        'barload': 'barload 2.9s linear'
       }
     },
   },

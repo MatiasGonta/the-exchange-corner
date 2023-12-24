@@ -11,7 +11,7 @@ export default async function MonthlyAreaChart({ from, to }: { from: string, to:
 
     const monthlyFXData = response["Time Series FX (Monthly)"];
 
-    const monthlyFXDataFormatted: [ year: string, TypeWithKey<string>[] ][] = [];
+    const monthlyFXDataFormatted: [year: string, TypeWithKey<string>[]][] = [];
 
     // Dates array
     const allDates: string[] = Object.keys(monthlyFXData);
@@ -22,7 +22,7 @@ export default async function MonthlyAreaChart({ from, to }: { from: string, to:
     allDates.forEach(date => {
         const year = date.split('-')[0];
 
-        if (year !== currentYear ) {
+        if (year !== currentYear) {
             // Change year and add FX data of before year to "monthlyFXDataFormatted"
             if (currentYear !== '') {
                 monthlyFXDataFormatted.push([currentYear, currentYearData]);
@@ -38,7 +38,7 @@ export default async function MonthlyAreaChart({ from, to }: { from: string, to:
         // Add FX data of current date
         currentYearData.push({
             date,
-            [`Exchange from ${from} to ${to}`]: exchangeRate
+            [`Tipo de cambio de ${from} a ${to}`]: exchangeRate
         });
     });
 
@@ -48,7 +48,7 @@ export default async function MonthlyAreaChart({ from, to }: { from: string, to:
     }
 
     // Colors for each year chart
-    const chartsColors = ["green-900","cyan", "indigo", "amber", "teal","blue","red","emerald","fuchsia","pink"];
+    const chartsColors = ["green-900", "cyan", "indigo", "amber", "teal", "blue", "red", "emerald", "fuchsia", "pink"];
 
     return (
         <TabGroup>
@@ -64,12 +64,12 @@ export default async function MonthlyAreaChart({ from, to }: { from: string, to:
                     monthlyFXDataFormatted.map(([year, fx], index) => (
                         <TabPanel key={index}>
                             <Card>
-                                <Title>{`${year} Exchange Rate`}</Title>
+                                <Title>{`Tipo de cambio de ${from} a ${to} durante ${year}`}</Title>
                                 <AreaChart
                                     className="h-72 mt-4"
                                     data={fx}
                                     index="date"
-                                    categories={[`Exchange from ${from} to ${to}`]}
+                                    categories={[`Tipo de cambio de ${from} a ${to}`]}
                                     colors={[`${chartsColors[index]}`]}
                                     yAxisWidth={30}
                                     showAnimation={true}

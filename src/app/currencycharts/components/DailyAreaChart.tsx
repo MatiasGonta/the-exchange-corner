@@ -1,6 +1,6 @@
 import { getDailyHistoryExchange } from '@/services';
-import { AreaChart, Card, Title } from "@tremor/react";
-import { fetchDailyData } from '@/utilities';
+import { AreaChart, Card, Subtitle, Title } from "@tremor/react";
+import { fetchDailyData, lastUpdatedDateFormatted } from '@/utilities';
 
 export default async function DailyAreaChart({ from, to }: { from: string, to: string }) {
   // const response = await getDailyHistoryExchange(from, to);
@@ -11,18 +11,22 @@ export default async function DailyAreaChart({ from, to }: { from: string, to: s
   // Create FXDaily data array for chart
   const chartData = dailyFXData.map(([date, fx]) => ({
     date,
-    [`Exchange from ${from} to ${to}`]: parseFloat(fx['4. close']),
+    [`Tipo de cambio de ${from} a ${to}`]: parseFloat(fx['4. close']),
   }));
+
+  // Exchange data last updated info
+  const lastUpdatedDate = lastUpdatedDateFormatted(response["Meta Data"]["5. Last Refreshed"], response["Meta Data"]["6. Time Zone"])
 
   return (
     <div className="shadow-lg">
       <Card>
-        <Title>{`${from} to ${to} Exchange Rate Over the Last 100 Days`}</Title>
+        <Title>{`Tipo de cambio de ${from} a ${to} en los últimos 100 días`}</Title>
+        <Subtitle>Última actualización {lastUpdatedDate}</Subtitle>
         <AreaChart
           className="h-72 mt-4"
           data={chartData}
           index="date"
-          categories={[`Exchange from ${from} to ${to}`]}
+          categories={[`Tipo de cambio de ${from} a ${to}`]}
           colors={["green-900"]}
           yAxisWidth={30}
           showAnimation={true}

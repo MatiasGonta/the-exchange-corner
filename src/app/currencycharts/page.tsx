@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { CurrencySelector, Navbar } from '@/components';
-import { Routes, TypeWithKey } from '@/models';
+import { Routes, TypeWithKey, countryISOList } from '@/models';
 import { DailyAreaChart, DailyAreaChartSkeleton, MonthlyAreaChart, MonthlyAreaChartSkeleton } from './components';
 
 interface CurrencyChartsInterface {
@@ -9,6 +9,9 @@ interface CurrencyChartsInterface {
 
 const CurrencyCharts = ({ searchParams }: CurrencyChartsInterface) => {
   const { From, To } = searchParams;
+
+  const fromCheck = From && From.length === 3 && From in countryISOList;
+  const toCheck = To && To.length === 3 && To in countryISOList;
 
   return (
     <>
@@ -20,9 +23,9 @@ const CurrencyCharts = ({ searchParams }: CurrencyChartsInterface) => {
           <CurrencySelector path={Routes.CURRENCY_CHARTS} from={From} to={To} />
         </article>
       </section>
-      <section className="mt-[150px] w-full max-w-[768px] mx-auto">
+      <section className="mt-[300px] w-full max-w-[768px] mx-auto md:mt-[150px]">
         {
-          From && To && (
+          fromCheck && toCheck && (
             <>
               <article className="w-full mb-[100px]">
                 <Suspense key={From + To} fallback={<DailyAreaChartSkeleton />}>

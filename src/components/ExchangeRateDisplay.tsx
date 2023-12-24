@@ -1,6 +1,6 @@
 import React from 'react';
 import { getCurrentExchange } from '@/services';
-import { fetchExchangeRate } from '@/utilities';
+import { fetchExchangeRate, lastUpdatedDateFormatted } from '@/utilities';
 import { TypeWithKey } from '@/models';
 
 interface ExchangeRateDisplayInterface {
@@ -10,8 +10,6 @@ interface ExchangeRateDisplayInterface {
 }
 
 const ExchangeRateDisplay = async ({ from, to, amount = '1' }: ExchangeRateDisplayInterface) => {
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
     // const response = await getCurrentExchange(from, to);
     const response: any = await fetchExchangeRate();
     const conversion = response['Realtime Currency Exchange Rate'];
@@ -29,14 +27,7 @@ const ExchangeRateDisplay = async ({ from, to, amount = '1' }: ExchangeRateDispl
     const exchangeRate: number = parseFloat(conversion['5. Exchange Rate']);
 
     // Exchange data last updated info
-    const lastUpdatedDate: TypeWithKey<string> = {
-        day: conversion['6. Last Refreshed'].split(' ')[0].split('-')[2],
-        month: conversion['6. Last Refreshed'].split(' ')[0].split('-')[1],
-        year: conversion['6. Last Refreshed'].split(' ')[0].split('-')[0],
-        time: conversion['6. Last Refreshed'].split(' ')[1]
-    };
-
-    const lastUpdatedDateFormatted = `${lastUpdatedDate.day} ${monthNames[parseInt(lastUpdatedDate.month) - 1]} ${lastUpdatedDate.year} - ${lastUpdatedDate.time} ${conversion['7. Time Zone']}`;
+    const lastUpdatedDate = lastUpdatedDateFormatted(conversion['6. Last Refreshed'], conversion['7. Time Zone']);
 
     return (
         <div className="flex flex-col w-full">
@@ -45,7 +36,7 @@ const ExchangeRateDisplay = async ({ from, to, amount = '1' }: ExchangeRateDispl
                     {amount} {currencyNames.from} =
                 </span>
                 <span className="my-[15px] text-[25px] font-extrabold">
-                    {exchangeRate * parseInt(amount)} {currencyNames.to}
+                    {exchangeRate * parseFloat(amount)} {currencyNames.to}
                 </span>
                 <ul className="flex flex-col h-[50px]">
                     <li>1 {currencyCodes.from} = {exchangeRate} {currencyCodes.to}</li>
@@ -69,7 +60,7 @@ const ExchangeRateDisplay = async ({ from, to, amount = '1' }: ExchangeRateDispl
                         />
                     </svg>
                 </div>
-                <span>{currencyNames.from} to {currencyNames.to} conversión — Última actualización {lastUpdatedDateFormatted}</span>
+                <p className="text-exchange-corner-light">Conversión de <span className="font-semibold underline decoration-solid">{currencyNames.from}</span> a <span className="font-semibold underline decoration-solid">{currencyNames.to}</span> — Última actualización {lastUpdatedDate}</p>
             </div>
         </div>
     )

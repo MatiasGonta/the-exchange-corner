@@ -12,18 +12,19 @@
 
 *::-webkit-scrollbar-track {
   border: 5px solid white;
-	background-color: #b2bec3;
+  border-radius: 10px;
+	background-color: #14532d34;
 }
 
 *::-webkit-scrollbar {
-  padding: 5px 0;
-	height: 10px;
-	background-color: #dfe6e9;
+	background-color: transparent;
 }
 
 *::-webkit-scrollbar-thumb {
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
 	background-color: #14532d;
-	border-radius: 10px;
+	border-radius: 5px;
 }
 
 .skeleton-fragment {
