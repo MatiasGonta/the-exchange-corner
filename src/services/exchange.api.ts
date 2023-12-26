@@ -1,10 +1,5 @@
-import { useContext } from "react";
-import { ToastContext } from "@/context";
 import { RootDailyResponse, ExchangeRateResponse, RootMonthlyResponse } from "@/models";
 import axios, { AxiosInstance } from "axios";
-import { ToastStatus } from '@/models';
-
-const { showToast } = useContext(ToastContext);
 
 const API_KEY = process.env.ALPHAVANTAGE_API_KEY;
 
@@ -30,9 +25,10 @@ export async function getCurrentExchange(baseCode: string, targetCode: string): 
 
     return response.data['Realtime Currency Exchange Rate'];
   } catch (err) {
-    console.error('Hubo un error al obtener el tipo de cambio actual: ', err);
-    showToast(ToastStatus.ERROR, 'Hubo un error al obtener el tipo de cambio actual');
-    throw new Error('Hubo un error al obtener el tipo de cambio actual');
+    const errorMsg = 'Hubo un error al obtener el tipo de cambio actual';
+
+    console.error(`${errorMsg}: ${err}`);
+    throw new Error(errorMsg);
   }
 };
 
@@ -50,9 +46,10 @@ export async function getCurrentExchange(baseCode: string, targetCode: string): 
 
       return response.data;
     } catch (err) {
-      console.error('Hubo un error al obtener el historial diario de intercambio: ', err);
-      showToast(ToastStatus.ERROR, 'Hubo un error al obtener el historial diario de intercambio');
-      throw new Error('Hubo un error al obtener el historial diario de intercambio');
+      const errorMsg = 'Hubo un error al obtener el historial diario de intercambio';
+
+      console.error(`${errorMsg}: ${err}`);
+      throw new Error(errorMsg);
     }
   };
 
@@ -69,8 +66,9 @@ export async function getCurrentExchange(baseCode: string, targetCode: string): 
 
       return response.data;
     } catch (err) {
-      console.error('Hubo un error al obtener el historial anual de intercambio: ', err);
-      showToast(ToastStatus.ERROR, 'Hubo un error al obtener el historial anual de intercambio');
-      throw new Error('Hubo un error al obtener el historial anual de intercambio');
+      const errorMsg = 'Hubo un error al obtener el historial anual de intercambio';
+
+      console.error(`${errorMsg}: ${err}`);
+      throw new Error(errorMsg);
     }
   };

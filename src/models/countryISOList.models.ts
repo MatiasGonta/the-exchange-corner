@@ -158,3 +158,5 @@ export enum countryISOList {
     "ZMK" = "ZM",
     "ZWD" = "ZW",
 }  
+
+export type CountryISOCode = keyof typeof countryISOList;

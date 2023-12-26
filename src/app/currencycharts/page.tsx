@@ -20,7 +20,7 @@ const CurrencyCharts = ({ searchParams }: CurrencyChartsInterface) => {
           <Navbar currentPath={Routes.CURRENCY_CHARTS} />
         </article>
         <article className="flex flex-col w-full max-w-[600px] m-[75px]">
-          <CurrencySelector path={Routes.CURRENCY_CHARTS} from={From} to={To} />
+          <CurrencySelector />
         </article>
       </section>
       <section className="mt-[300px] w-full max-w-[768px] mx-auto md:mt-[150px]">

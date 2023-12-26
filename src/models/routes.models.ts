@@ -1,4 +1,4 @@
 export enum Routes {
-    CONVERT = '/convert',
+    CONVERT = '/',
     CURRENCY_CHARTS = '/currencycharts'
 }

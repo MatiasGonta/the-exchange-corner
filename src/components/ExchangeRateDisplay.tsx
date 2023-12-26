@@ -10,7 +10,7 @@ interface ExchangeRateDisplayInterface {
 }
 
 const ExchangeRateDisplay = async ({ from, to, amount = '1' }: ExchangeRateDisplayInterface) => {
-    // const response = await getCurrentExchange(from, to);
+    // const conversion = await getCurrentExchange(from, to);
     const response: any = await fetchExchangeRate();
     const conversion = response['Realtime Currency Exchange Rate'];
 

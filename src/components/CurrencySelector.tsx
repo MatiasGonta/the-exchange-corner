@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ToastContext } from '@/context';
 import { countryISOList } from '@/models';
 import { Routes, TypeWithKey, ToastStatus } from '@/models';
@@ -9,12 +9,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { FlagIconSkeleton } from '@/components';
 import Image from 'next/image';
 
-interface CurrencySelectorInterface {
-    path: Routes;
-    from?: string;
-    to?: string;
-    currencyAmount?: string;
-}
+interface CurrencySelectorInterface {}
 
 type CurrencyState = {
     base: string,
@@ -22,13 +17,15 @@ type CurrencyState = {
     amount: number,
 }
 
-function CurrencySelector({ path, from, to, currencyAmount }: CurrencySelectorInterface) {
+const CurrencySelector: React.FC<CurrencySelectorInterface> = () => {
     const { showToast } = useContext(ToastContext);
+    const currencyParams = useSearchParams();
+    const pathname = usePathname();
 
-    const [isInputFocused, setIsInputFocused] = useState<TypeWithKey<boolean>>({
-        base: false,
-        target: false
-    });
+    // URL params
+    const from = currencyParams.get('From');
+    const to = currencyParams.get('To');
+    const currencyAmount = currencyParams.get('Amount');
 
     // Session Storage values
     const sessionStorageData = JSON.parse(getSessionStorage('currencyOptions')!) || {};
@@ -42,7 +39,17 @@ function CurrencySelector({ path, from, to, currencyAmount }: CurrencySelectorIn
         amount: currencyAmount ? parseFloat(currencyAmount) : (savedAmount && savedAmount !== '' ? savedAmount : 1),
     };
 
+    // Input States
+    const [isInputFocused, setIsInputFocused] = useState<TypeWithKey<boolean>>({
+        base: false,
+        target: false
+    });
+
     const [inputValues, setInputValues] = useState<CurrencyState>(initialState);
+
+    useEffect(() => {
+        setInputValues(initialState);
+    }, [from, to, currencyAmount]);
 
     const handleInputValues = (key: keyof CurrencyState, value: string | number) => {
         setInputValues((prevState) => ({ ...prevState, [key]: value }));
@@ -169,8 +176,6 @@ function CurrencySelector({ path, from, to, currencyAmount }: CurrencySelectorIn
     };
 
     // Handle URL params
-    const currencyParams = useSearchParams();
-    const pathname = usePathname();
     const { replace } = useRouter();
 
     const handleCurrencyParams = () => {
@@ -188,7 +193,7 @@ function CurrencySelector({ path, from, to, currencyAmount }: CurrencySelectorIn
         params.set('From', inputValues.base)
         params.set('To', inputValues.target)
 
-        if (path === Routes.CONVERT) {
+        if (pathname === Routes.CONVERT) {
             params.set('Amount', inputValues.amount.toString())
         }
 
@@ -204,7 +209,7 @@ function CurrencySelector({ path, from, to, currencyAmount }: CurrencySelectorIn
             ></div>
             <div className="w-full mb-[35px] flex flex-col justify-between items-center md:flex-row">
                 {
-                    path === Routes.CONVERT && (
+                    pathname === Routes.CONVERT && (
                         <div className="relative w-[135px] mb-[50px] md:mb-0">
                             <label
                                 htmlFor="currency-amount"
@@ -269,7 +274,7 @@ function CurrencySelector({ path, from, to, currencyAmount }: CurrencySelectorIn
                         <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
                     </svg>
                     {
-                        path === Routes.CONVERT ? 'Convertir' : 'Ver Gráficos'
+                        pathname === Routes.CONVERT ? 'Convertir' : 'Ver Gráficos'
                     }
                 </button>
             </div>
