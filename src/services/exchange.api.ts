@@ -1,4 +1,4 @@
-import { RootDailyResponse, ExchangeRateResponse, RootMonthlyResponse } from "@/models";
+import { RootDailyResponse, ExchangeRateResponse, RootMonthlyResponse, ErrorMessages } from "@/models";
 import axios, { AxiosInstance } from "axios";
 
 const API_KEY = process.env.ALPHAVANTAGE_API_KEY;
@@ -25,10 +25,8 @@ export async function getCurrentExchange(baseCode: string, targetCode: string): 
 
     return response.data['Realtime Currency Exchange Rate'];
   } catch (err) {
-    const errorMsg = 'Hubo un error al obtener el tipo de cambio actual';
-
-    console.error(`${errorMsg}: ${err}`);
-    throw new Error(errorMsg);
+    console.error(`${ErrorMessages.CURRENCY_EXCHANGE_RATE}: ${err}`);
+    throw new Error(ErrorMessages.CURRENCY_EXCHANGE_RATE);
   }
 };
 
@@ -46,10 +44,8 @@ export async function getCurrentExchange(baseCode: string, targetCode: string): 
 
       return response.data;
     } catch (err) {
-      const errorMsg = 'Hubo un error al obtener el historial diario de intercambio';
-
-      console.error(`${errorMsg}: ${err}`);
-      throw new Error(errorMsg);
+      console.error(`${ErrorMessages.FX_DAILY}: ${err}`);
+      throw new Error(ErrorMessages.FX_DAILY);
     }
   };
 
@@ -66,9 +62,7 @@ export async function getCurrentExchange(baseCode: string, targetCode: string): 
 
       return response.data;
     } catch (err) {
-      const errorMsg = 'Hubo un error al obtener el historial anual de intercambio';
-
-      console.error(`${errorMsg}: ${err}`);
-      throw new Error(errorMsg);
+      console.error(`${ErrorMessages.FX_MONTHLY}: ${err}`);
+      throw new Error(ErrorMessages.FX_MONTHLY);
     }
   };

@@ -15,6 +15,7 @@ export const fetchExchangeRate = async () => {
           "9. Ask Price": "142.31940000"
         }
       });
+      // resolve({});
     }, 3000); // Retardo de 3 segundos
   });
 };

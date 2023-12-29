@@ -1,3 +1,9 @@
+export enum ErrorMessages {
+  CURRENCY_EXCHANGE_RATE = 'Hubo un error al obtener el tipo de cambio actual',
+  FX_DAILY = 'Hubo un error al obtener el historial diario de intercambio',
+  FX_MONTHLY = 'Hubo un error al obtener el historial anual de intercambio',
+}
+
 // CURRENCY_EXCHANGE_RATE
 export interface ExchangeRateResponse {
   '1. From_Currency Code': string;
@@ -13,17 +19,17 @@ export interface ExchangeRateResponse {
 
 // FX_DAILY
 export interface RootDailyResponse {
-    'Meta Data': DailyMetaData;
-    'Time Series FX (Daily)': TimeSeriesFX;
-  }
+  'Meta Data': DailyMetaData;
+  'Time Series FX (Daily)': TimeSeriesFX;
+}
 
 interface DailyMetaData {
-    '1. Information': string;
-    '2. From Symbol': string;
-    '3. To Symbol': string;
-    '4. Output Size': string;
-    '5. Last Refreshed': string;
-    '6. Time Zone': string;
+  '1. Information': string;
+  '2. From Symbol': string;
+  '3. To Symbol': string;
+  '4. Output Size': string;
+  '5. Last Refreshed': string;
+  '6. Time Zone': string;
 }
 
 // FX_MONTHLY
@@ -41,12 +47,12 @@ interface MonthlyMetaData {
 }
 
 interface TimeSeriesFX {
-    [key: string]: FX;
+  [key: string]: FX;
 }
 
 interface FX {
-    '1. open': string;
-    '2. high': string;
-    '3. low': string;
-    '4. close': string;
+  '1. open': string;
+  '2. high': string;
+  '3. low': string;
+  '4. close': string;
 }

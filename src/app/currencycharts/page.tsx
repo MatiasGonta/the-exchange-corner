@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react';
 import { CurrencySelector, Navbar } from '@/components';
-import { Routes, TypeWithKey, countryISOList } from '@/models';
+import { Routes, TypeWithKey } from '@/models';
 import { DailyAreaChart, DailyAreaChartSkeleton, MonthlyAreaChart, MonthlyAreaChartSkeleton } from './components';
+import { paramsAuth } from '@/utilities';
 
 interface CurrencyChartsInterface {
   searchParams: TypeWithKey<string>;
@@ -10,8 +11,7 @@ interface CurrencyChartsInterface {
 const CurrencyCharts = ({ searchParams }: CurrencyChartsInterface) => {
   const { From, To } = searchParams;
 
-  const fromCheck = From && From.length === 3 && From in countryISOList;
-  const toCheck = To && To.length === 3 && To in countryISOList;
+  const paramsCheck = paramsAuth(From, To);
 
   return (
     <>
@@ -25,7 +25,7 @@ const CurrencyCharts = ({ searchParams }: CurrencyChartsInterface) => {
       </section>
       <section className="mt-[300px] w-full max-w-[768px] mx-auto md:mt-[150px]">
         {
-          fromCheck && toCheck && (
+          paramsCheck && (
             <>
               <article className="w-full mb-[100px]">
                 <Suspense key={From + To} fallback={<DailyAreaChartSkeleton />}>

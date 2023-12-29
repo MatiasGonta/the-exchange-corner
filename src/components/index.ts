@@ -1,5 +1,9 @@
-export { default as CurrencySelector } from './CurrencySelector';
-export { default as ExchangeRateDisplay } from './ExchangeRateDisplay';
-export { default as Navbar } from './Navbar';
-export { default as Toast } from './Toast';
+export * from './CurrencySelector';
+export * from './ErrorBoundary';
+export * from './ErrorComponent';
+export * from './ExchangeRateDisplay';
+export * from './FavoriteExchanges';
+export * from './Navbar';
+export * from './PopularCurrencies';
+export * from './Toast';
 export * from './skeletons';

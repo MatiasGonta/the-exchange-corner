@@ -9,12 +9,12 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { FlagIconSkeleton } from '@/components';
 import Image from 'next/image';
 
-interface CurrencySelectorInterface {}
+interface CurrencySelectorInterface { }
 
 type CurrencyState = {
     base: string,
     target: string,
-    amount: number,
+    amount: string,
 }
 
 const CurrencySelector: React.FC<CurrencySelectorInterface> = () => {
@@ -36,7 +36,7 @@ const CurrencySelector: React.FC<CurrencySelectorInterface> = () => {
     const initialState: CurrencyState = {
         base: from || (savedBaseCode && savedBaseCode !== '' ? savedBaseCode : 'USD'),
         target: to || (savedTargetCode && savedTargetCode !== '' ? savedTargetCode : 'EUR'),
-        amount: currencyAmount ? parseFloat(currencyAmount) : (savedAmount && savedAmount !== '' ? savedAmount : 1),
+        amount: currencyAmount || (savedAmount && savedAmount !== '' ? savedAmount : '1'),
     };
 
     // Input States
@@ -51,9 +51,15 @@ const CurrencySelector: React.FC<CurrencySelectorInterface> = () => {
         setInputValues(initialState);
     }, [from, to, currencyAmount]);
 
-    const handleInputValues = (key: keyof CurrencyState, value: string | number) => {
-        setInputValues((prevState) => ({ ...prevState, [key]: value }));
-        setSessionStorage('currencyOptions', { ...inputValues, [key]: value });
+    const handleInputValues = (key: keyof CurrencyState, value: string) => {
+        let newValue = value;
+
+        if (key === 'amount') {
+            newValue = value.replace(/,/g, '.'); // Replace commas with dots
+        }
+
+        setInputValues((prevState) => ({ ...prevState, [key]: newValue }));
+        setSessionStorage('currencyOptions', { ...inputValues, [key]: newValue });
     };
 
     const handleSwapValues = () => {
@@ -74,7 +80,7 @@ const CurrencySelector: React.FC<CurrencySelectorInterface> = () => {
                 width={32}
                 height={32}
                 key={selectedCurrencyFlag}
-                className="w-auto h-auto max-w-[32px] max-h-[24px] absolute left-[10px] top-[12.5px]"
+                className="w-auto h-auto max-w-[32px] max-h-[24px] absolute left-[10px] top-[12.5px] border border-[#ccc] rounded"
             />
         ) : (
             <FlagIconSkeleton />
@@ -99,9 +105,9 @@ const CurrencySelector: React.FC<CurrencySelectorInterface> = () => {
                     name={inputName}
                     value={inputValue}
                     autoComplete="off"
-                    maxLength={3}
                     onChange={(e) => handleInputValues(inputName, e.target.value.toUpperCase())}
                     onFocus={() => setIsInputFocused((prevState) => ({ ...prevState, [inputName]: true }))}
+                    maxLength={3}
                 />
                 {
                     !isFocused ? (
@@ -164,7 +170,7 @@ const CurrencySelector: React.FC<CurrencySelectorInterface> = () => {
                                     alt={`${inputName}-${key}`}
                                     width={32}
                                     height={32}
-                                    className="w-auto h-auto max-w-[32px] max-h-[24px]"
+                                    className="w-auto h-auto max-w-[32px] max-h-[24px] border border-[#ccc] rounded"
                                 />
                                 <span className="ml-[10px]">{key}</span>
                             </li>
@@ -219,10 +225,9 @@ const CurrencySelector: React.FC<CurrencySelectorInterface> = () => {
                             </label>
                             <input
                                 className="w-full h-[50px] outline-none border-[1px] border-[#dddddd] shadow-sm rounded-md pl-[15px] pr-[5px] text-[#141e37] focus:border-green-900"
-                                name="currency-amount"
-                                type="number"
+                                name="amount"
+                                autoComplete="off"
                                 value={inputValues.amount}
-                                min={1}
                                 onChange={(e) => handleInputValues('amount', e.target.value)}
                             />
                         </div>

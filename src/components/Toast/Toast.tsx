@@ -71,7 +71,7 @@ export default function Toast() {
     const selectedLoadingBarColor = loadingBarColors[toastConfig.status];
 
     return (
-        <div className={`fixed top-[25px] right-[25px] flex flex-col transition-all ${toastConfig.show ? 'w-full h-auto opacity-1' : 'w-0 h-0 opacity-0'} max-w-[400px] text-gray-500 bg-white rounded-lg shadow`}>
+        <div className={`fixed top-[25px] right-[25px] flex flex-col transition-all z-toast ${toastConfig.show ? 'w-full h-auto opacity-1' : 'w-0 h-0 opacity-0'} max-w-[400px] text-gray-500 bg-white rounded-lg shadow`}>
             <div className="flex items-center w-auto h-auto p-4">
                 {selectedStatusIcon}
                 <div className="ms-3 text-sm font-normal">{toastConfig.text}</div>

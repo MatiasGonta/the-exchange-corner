@@ -10,6 +10,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      zIndex: {
+        'toast': '9999',
+      },
       colors: {
         // light mode
         'exchange-corner': '#202020',
@@ -86,11 +89,39 @@ const config: Config = {
           '100%': {
             width: '0',
           }
+        },
+        'like': {
+          '0%': {
+            transform: 'scale(0)',
+          },
+        
+          '50%': {
+            transform: 'scale(1.2)',
+          },
+        
+          '100%': {
+            transform: 'scale(1)',
+          }
+        },
+        'dislike': {
+          '0%': {
+            transform: 'scale(0)',
+          },
+        
+          '50%': {
+            transform: 'scale(1.2)',
+          },
+        
+          '100%': {
+            transform: 'scale(1)',
+          }
         }
       },
       animation: {
         'move': 'move 4s linear infinite',
-        'barload': 'barload 2.9s linear'
+        'barload': 'barload 2.9s linear',
+        'like': 'like 0.5s ease',
+        'dislike': 'dislike 0.5s ease',
       }
     },
   },
