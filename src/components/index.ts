@@ -2,6 +2,7 @@ export * from './CurrencySelector';
 export * from './ErrorBoundary';
 export * from './ErrorComponent';
 export * from './ExchangeRateDisplay';
+export * from './FavoriteExchangeCheckbox';
 export * from './FavoriteExchanges';
 export * from './Navbar';
 export * from './PopularCurrencies';

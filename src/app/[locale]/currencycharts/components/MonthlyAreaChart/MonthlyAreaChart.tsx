@@ -3,8 +3,11 @@ import { getMonthlyHistoryExchange } from '@/services';
 import { AreaChart, Card, Tab, TabGroup, TabList, TabPanel, TabPanels, Title } from "@tremor/react";
 import { TypeWithKey } from '@/models';
 import { fetchMonthlyData } from '@/utilities';
+import { getTranslations } from 'next-intl/server';
 
 export default async function MonthlyAreaChart({ from, to }: { from: string, to: string }) {
+    const tCurrencyCharts = await getTranslations('CurrencyCharts');
+
     // const response = await getMonthlyHistoryExchange(from, to);
 
     const response: any = await fetchMonthlyData();
@@ -38,7 +41,7 @@ export default async function MonthlyAreaChart({ from, to }: { from: string, to:
         // Add FX data of current date
         currentYearData.push({
             date,
-            [`Tipo de cambio de ${from} a ${to}`]: exchangeRate
+            [tCurrencyCharts('charts.monthly.category', { from, to })]: exchangeRate
         });
     });
 
@@ -64,12 +67,12 @@ export default async function MonthlyAreaChart({ from, to }: { from: string, to:
                     monthlyFXDataFormatted.map(([year, fx], index) => (
                         <TabPanel key={index}>
                             <Card>
-                                <Title>{`Tipo de cambio de ${from} a ${to} durante ${year}`}</Title>
+                                <Title>{tCurrencyCharts('charts.monthly.title', { from, to, year })}</Title>
                                 <AreaChart
                                     className="h-72 mt-4"
                                     data={fx}
                                     index="date"
-                                    categories={[`Tipo de cambio de ${from} a ${to}`]}
+                                    categories={[tCurrencyCharts('charts.monthly.category', { from, to })]}
                                     colors={[`${chartsColors[index]}`]}
                                     yAxisWidth={30}
                                     showAnimation={true}

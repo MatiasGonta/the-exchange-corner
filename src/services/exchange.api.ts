@@ -1,4 +1,4 @@
-import { RootDailyResponse, ExchangeRateResponse, RootMonthlyResponse, ErrorMessages } from "@/models";
+import { RootDailyResponse, ExchangeRateResponse, RootMonthlyResponse } from "@/models";
 import axios, { AxiosInstance } from "axios";
 
 const API_KEY = process.env.ALPHAVANTAGE_API_KEY;
@@ -25,8 +25,8 @@ export async function getCurrentExchange(baseCode: string, targetCode: string): 
 
     return response.data['Realtime Currency Exchange Rate'];
   } catch (err) {
-    console.error(`${ErrorMessages.CURRENCY_EXCHANGE_RATE}: ${err}`);
-    throw new Error(ErrorMessages.CURRENCY_EXCHANGE_RATE);
+    console.error(`CURRENCY_EXCHANGE_RATE: ${err}`);
+    throw new Error(`CURRENCY_EXCHANGE_RATE: ${err}`);
   }
 };
 
@@ -44,8 +44,8 @@ export async function getCurrentExchange(baseCode: string, targetCode: string): 
 
       return response.data;
     } catch (err) {
-      console.error(`${ErrorMessages.FX_DAILY}: ${err}`);
-      throw new Error(ErrorMessages.FX_DAILY);
+      console.error(`FX_DAILY: ${err}`);
+      throw new Error(`FX_DAILY: ${err}`);
     }
   };
 
@@ -62,7 +62,7 @@ export async function getCurrentExchange(baseCode: string, targetCode: string): 
 
       return response.data;
     } catch (err) {
-      console.error(`${ErrorMessages.FX_MONTHLY}: ${err}`);
-      throw new Error(ErrorMessages.FX_MONTHLY);
+      console.error(`FX_MONTHLY: ${err}`);
+      throw new Error(`FX_MONTHLY: ${err}`);
     }
   };

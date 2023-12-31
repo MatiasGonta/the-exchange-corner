@@ -1,0 +1,78 @@
+{
+    "Common": {
+        "metadata": {
+            "description": "Discover the world of currencies with The Exchange Corner, your leading app for swift and precise currency conversions. Obtain real-time exchange rates, choose from a wide variety of currencies, and effortlessly convert any amount. From dollars to euros, to yen to pounds, Mundo Divisas provides you with the essential tools to stay informed about fluctuations in the international financial market. With an intuitive interface and up-to-date data, your currency conversion experience has never been this easy and efficient. Explore the financial world with The Exchange Corner today!"
+        },
+        "links": {
+            "convert": "Convert",
+            "graphs": "Graphs"
+        },
+        "currency-selector": {
+            "amount": "Amount",
+            "base": "From",
+            "target": "To"
+        },
+        "footer": {
+            "nav": "Navegation"
+        },
+        "error-component": {
+            "button": "Back"
+        }
+    },
+    "Convert": {
+        "currency-selector": {
+            "button": "Convert"
+        },
+        "exchange-rate-display": {
+            "last-update": {
+                "0": "Conversion of",
+                "1": "to",
+                "2": "Last update"
+            },
+            "table": {
+                "title": "Conversion from {fromName} to {toName}"
+            }
+        },
+        "favorite-exchanges": {
+            "title": "Your favorite exchange rates",
+            "empty": "You haven't added favorite exchanges yet"
+        },
+        "favorite-exchange-checkbox": {
+            "checked": "Add conversion to favorites",
+            "noChecked": "Delete favorite conversion"
+        },
+        "popular-currencies": {
+            "title": "Most common currency pairs for ({fromCurrency})"
+        },
+        "card": {
+            "connector": "to",
+            "link": "Watch"
+        },
+        "errors": {
+            "CURRENCY_EXCHANGE_RATE": "There was an error getting the current exchange rate"
+        }
+    },
+    "CurrencyCharts": {
+        "metadata": {
+            "title": "The Exchange Corner | Graphs"
+        },
+        "currency-selector": {
+            "button": "Watch Graphs"
+        },
+        "charts": {
+            "daily": {
+                "title": "{from} to {to} exchange rate in the last 100 days",
+                "subtitle": "Last update",
+                "category": "Exchange rate from {from} to {to}"
+            },
+            "monthly": {
+                "title": "Exchange rate from {from} to {to} during {year}",
+                "category": "Exchange rate from {from} to {to}"
+            }
+        },
+        "errors": {
+            "FX_DAILY": "There was an error getting the daily exchange history",
+            "FX_MONTHLY": "There was an error getting the annual exchange history"
+        }
+    }
+}

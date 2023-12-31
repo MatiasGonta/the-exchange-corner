@@ -1,0 +1,78 @@
+{
+    "Common": {
+        "metadata": {
+            "description": "Descubre el mundo de las divisas con The Exchange Corner, tu aplicación líder para realizar conversiones de monedas de manera rápida y precisa. Obtén tasas de cambio en tiempo real, elige entre una amplia variedad de monedas y convierte fácilmente cualquier cantidad. Desde dólares a euros hasta yenes a libras, Mundo Divisas te proporciona las herramientas esenciales para estar siempre al tanto de las fluctuaciones del mercado financiero internacional. Con una interfaz intuitiva y datos actualizados, tu experiencia de conversión de monedas nunca ha sido tan fácil y eficiente. ¡Explora el mundo financiero con The Exchange Corner hoy mismo!"
+        },
+        "links": {
+            "convert": "Conversor",
+            "graphs": "Gráficos"
+        },
+        "currency-selector": {
+            "amount": "Importe",
+            "base": "De",
+            "target": "a"
+        },
+        "footer": {
+            "nav": "Navegación"
+        },
+        "error-component": {
+            "button": "Volver"
+        }
+    },
+    "Convert": {
+        "currency-selector": {
+            "button": "Convertir"
+        },
+        "exchange-rate-display": {
+            "last-update": {
+                "0": "Conversión de",
+                "1": "a",
+                "2": "Última actualización"
+            },
+            "table": {
+                "title": "Conversión de {fromName} a {toName}"
+            }
+        },
+        "favorite-exchanges": {
+            "title": "Tus tipos de cambio favoritos",
+            "empty": "Aun no has agregado intercambios favoritos"
+        },
+        "favorite-exchange-checkbox": {
+            "checked": "Añadir conversión a favoritos",
+            "noChecked": "Eliminar conversión favorita"
+        },
+        "popular-currencies": {
+            "title": "Pares de divisas más comunes para ({fromCurrency})"
+        },
+        "card": {
+            "connector": "a",
+            "link": "Ver"
+        },
+        "errors": {
+            "CURRENCY_EXCHANGE_RATE": "Hubo un error al obtener el tipo de cambio actual"
+        }
+    },
+    "CurrencyCharts": {
+        "metadata": {
+            "title": "The Exchange Corner | Gráficos"
+        },
+        "currency-selector": {
+            "button": "Ver Gráficos"
+        },
+        "charts": {
+            "daily": {
+                "title": "Tipo de cambio de {from} a {to} en los últimos 100 días",
+                "subtitle": "Última actualización",
+                "category": "Tipo de cambio de {from} a {to}"
+            },
+            "monthly": {
+                "title": "Tipo de cambio de {from} a {to} durante {year}",
+                "category": "Tipo de cambio de {from} a {to}"
+            }
+        },
+        "errors": {
+            "FX_DAILY": "Hubo un error al obtener el historial diario de intercambio",
+            "FX_MONTHLY": "Hubo un error al obtener el historial anual de intercambio"
+        }
+    }
+}

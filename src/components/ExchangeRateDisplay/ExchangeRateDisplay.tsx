@@ -4,6 +4,7 @@ import { fetchExchangeRate, lastUpdatedDateFormatted } from '@/utilities';
 import { ExchangeRateComparisonTable } from './ExchangeRateComparisonTable';
 import { FavoriteExchangeCheckbox } from '../FavoriteExchangeCheckbox';
 import { CountryISOCode, TypeWithKey } from '@/models';
+import { getTranslations } from 'next-intl/server';
 
 interface ExchangeRateDisplayInterface {
     from: string;
@@ -12,6 +13,13 @@ interface ExchangeRateDisplayInterface {
 }
 
 const ExchangeRateDisplay = async ({ from, to, amount = '1' }: ExchangeRateDisplayInterface) => {
+    const tConvert = await getTranslations('Convert');
+    
+    const checkboxLabels = {
+        checked: tConvert('favorite-exchange-checkbox.checked'),
+        noChecked: tConvert('favorite-exchange-checkbox.noChecked'),
+    };
+
     // const conversion = await getCurrentExchange(from, to);
     const response: any = await fetchExchangeRate();
     const conversion = response['Realtime Currency Exchange Rate'];
@@ -36,7 +44,7 @@ const ExchangeRateDisplay = async ({ from, to, amount = '1' }: ExchangeRateDispl
         <>
             <div className="relative flex flex-col w-full mb-[50px]">
                 <div className="absolute top-[20px] right-0">
-                    <FavoriteExchangeCheckbox from={currencyCodes.from} to={currencyCodes.to} />
+                    <FavoriteExchangeCheckbox from={currencyCodes.from} to={currencyCodes.to} labels={checkboxLabels} />
                 </div>
                 <div className="flex flex-col my-[20px] text-[16px]">
                     <span className="font-semibold text-exchange-corner-light">
@@ -67,7 +75,13 @@ const ExchangeRateDisplay = async ({ from, to, amount = '1' }: ExchangeRateDispl
                             />
                         </svg>
                     </div>
-                    <p className="text-exchange-corner-light">Conversión de <span className="font-semibold underline decoration-solid">{currencyNames.from}</span> a <span className="font-semibold underline decoration-solid">{currencyNames.to}</span> — Última actualización {lastUpdatedDate}</p>
+                    <p className="text-exchange-corner-light">
+                        {tConvert('exchange-rate-display.last-update.0')}
+                        {' '}<span className="font-semibold underline decoration-solid">{currencyNames.from}</span>
+                        {' '}{tConvert('exchange-rate-display.last-update.1')}
+                        {' '}<span className="font-semibold underline decoration-solid">{currencyNames.to}</span>
+                        {' '}— {tConvert('exchange-rate-display.last-update.2')} {lastUpdatedDate}
+                    </p>
                 </div>
             </div>
             <div className="flex flex-col items-center md:flex-row md:justify-between">

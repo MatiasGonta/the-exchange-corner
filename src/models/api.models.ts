@@ -1,9 +1,3 @@
-export enum ErrorMessages {
-  CURRENCY_EXCHANGE_RATE = 'Hubo un error al obtener el tipo de cambio actual',
-  FX_DAILY = 'Hubo un error al obtener el historial diario de intercambio',
-  FX_MONTHLY = 'Hubo un error al obtener el historial anual de intercambio',
-}
-
 // CURRENCY_EXCHANGE_RATE
 export interface ExchangeRateResponse {
   '1. From_Currency Code': string;

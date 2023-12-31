@@ -7,33 +7,41 @@ import React, { useState } from 'react';
 interface FavoriteExchangeCheckboxInterface {
     from: CountryISOCode;
     to: CountryISOCode;
+    labels: { checked: string, noChecked: string };
 }
 
-const FavoriteExchangeCheckbox: React.FC<FavoriteExchangeCheckboxInterface> = ({ from, to }) => {
+const FavoriteExchangeCheckbox: React.FC<FavoriteExchangeCheckboxInterface> = ({ from, to, labels }) => {
     const favoriteExchangesRaw = getLocalStorage('favoriteExchanges');
-    const favoriteExchanges: [{ from: CountryISOCode, to: CountryISOCode }] = favoriteExchangesRaw ? JSON.parse(favoriteExchangesRaw) : [];
+    const favoriteExchanges: [{ from: CountryISOCode, to: CountryISOCode }] = favoriteExchangesRaw
+        ? JSON.parse(favoriteExchangesRaw)
+        : [];
 
-    const isFavorite = favoriteExchanges.some((exchange: { from: string, to: string }) => exchange.from === from && exchange.to === to);
+    const isFavorite = favoriteExchanges.some((exchange) => exchange.from === from && exchange.to === to);
 
     const [isChecked, setIsChecked] = useState<boolean>(isFavorite);
 
     const handleOnChange = () => {
+        const favoriteExchangesRaw = getLocalStorage('favoriteExchanges');
+        const favoriteExchanges: [{ from: CountryISOCode, to: CountryISOCode }] = favoriteExchangesRaw
+            ? JSON.parse(favoriteExchangesRaw)
+            : [];
+
         let newFavoriteExchanges;
 
         if (!isChecked) {
-            newFavoriteExchanges = [ { from, to }, ...favoriteExchanges ];
+            newFavoriteExchanges = [{ from, to }, ...favoriteExchanges];
 
             if (newFavoriteExchanges.length > 6) {
                 newFavoriteExchanges.pop();
             }
 
             setIsChecked(true);
-            setLocalStorage('favoriteExchanges', newFavoriteExchanges);
         } else {
-            newFavoriteExchanges = favoriteExchanges.filter((exchange: { from: string, to: string }) => exchange.from !== from || exchange.to !== to);
+            newFavoriteExchanges = favoriteExchanges.filter((exchange) => exchange.from !== from && exchange.to !== to);
             setIsChecked(false);
-            setLocalStorage('favoriteExchanges', newFavoriteExchanges);
         }
+
+        setLocalStorage('favoriteExchanges', newFavoriteExchanges);
     }
 
     return (
@@ -63,9 +71,9 @@ const FavoriteExchangeCheckbox: React.FC<FavoriteExchangeCheckboxInterface> = ({
                 </svg>
                 <label
                     htmlFor="favorite"
-                    className="absolute opacity-0 invisible z-10 w-auto h-0 bg-[#555] text-[10px] text-white text-center rounded-md top-[125%] left-[-140%] transition-opacity group-hover:opacity-100 group-hover:w-[105px] group-hover:h-auto group-hover:p-[5px] group-hover:visible before:content-[''] before:z-[-1] before:absolute before:top-[-2px] before:left-[45px] before:w-[15px] before:h-[15px] before:rotate-45 before:bg-[#555]"
+                    className="absolute opacity-0 invisible z-10 w-auto h-0 bg-[#555] text-[10px] text-white text-center rounded-md top-[125%] left-[-145%] transition-opacity group-hover:opacity-100 group-hover:w-[110px] group-hover:h-auto group-hover:p-[5px] group-hover:visible before:content-[''] before:z-[-1] before:absolute before:top-[-2px] before:left-[47px] before:w-[15px] before:h-[15px] before:rotate-45 before:bg-[#555]"
                 >
-                    {isChecked ? 'Añadir conversión a favoritos' : 'Eliminar conversión favorita'}
+                    {isChecked ? labels.checked : labels.noChecked}
                 </label>
             </div>
         </div>

@@ -1,22 +1,37 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toast } from '@/components';
-import { Routes } from '@/models';
+import { Routes, TypeWithKey } from '@/models';
 import { ToastProvider } from '@/context';
+import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
-import './globals.css';
+import '../globals.css';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title: 'The Exchange Corner',
-  description: 'Descubre el mundo de las divisas con The Exchange Corner, tu aplicación líder para realizar conversiones de monedas de manera rápida y precisa. Obtén tasas de cambio en tiempo real, elige entre una amplia variedad de monedas y convierte fácilmente cualquier cantidad. Desde dólares a euros hasta yenes a libras, Mundo Divisas te proporciona las herramientas esenciales para estar siempre al tanto de las fluctuaciones del mercado financiero internacional. Con una interfaz intuitiva y datos actualizados, tu experiencia de conversión de monedas nunca ha sido tan fácil y eficiente. ¡Explora el mundo financiero con The Exchange Corner hoy mismo!',
+export async function generateMetadata(): Promise<Metadata> {
+  const tCommon = await getTranslations('Common');
+ 
+  return {
+    title: 'The Exchange Corner',
+    description: tCommon('metadata.description')
+  }
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+interface RootLayoutInterface {
+  children: React.ReactNode,
+  params: TypeWithKey<string>
+}
+
+export default function RootLayout({ children, params }: RootLayoutInterface) {
+  const { locale } = params;
+
+  const tCommon = useTranslations('Common');
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         <link rel="icon" href="/the-exchange-corner-logo.ico"></link>
       </head>
@@ -52,13 +67,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 />
               </div>
               <div className="w-fit mx-auto mb-[35px] sm:m-0">
-                <h2 className="font-bold mb-[5px]">Navegación</h2>
+                <h2 className="font-bold mb-[5px]">{tCommon('footer.nav')}</h2>
                 <ul className="text-[16px]">
                   <li className="w-fit relative before:transition-all before:absolute before:bottom-[2px] before:left-1/2 before:translate-x-1/2 before:content-[''] before:w-0 before:h-[1px] before:bg-white hover:before:left-0 hover:before:translate-x-0 hover:before:w-full">
-                    <Link href={Routes.CONVERT}>Conversor</Link>
+                    <Link href={Routes.CONVERT}>{tCommon('links.convert')}</Link>
                   </li>
                   <li className="w-fit relative before:transition-all before:absolute before:bottom-[2px] before:left-1/2 before:translate-x-1/2 before:content-[''] before:w-0 before:h-[1px] before:bg-white hover:before:left-0 hover:before:translate-x-0 hover:before:w-full">
-                    <Link href={Routes.CURRENCY_CHARTS}>Gráficos</Link>
+                    <Link href={locale + Routes.CURRENCY_CHARTS}>{tCommon('links.graphs')}</Link>
                   </li>
                 </ul>
               </div>

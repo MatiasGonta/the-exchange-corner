@@ -9,7 +9,16 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { FlagIconSkeleton } from '@/components';
 import Image from 'next/image';
 
-interface CurrencySelectorInterface { }
+interface InputLabels {
+    amount?: string,
+    base: string,
+    target: string,
+}
+
+interface CurrencySelectorInterface {
+    labels: InputLabels,
+    buttonText: string
+}
 
 type CurrencyState = {
     base: string,
@@ -17,10 +26,11 @@ type CurrencyState = {
     amount: string,
 }
 
-const CurrencySelector: React.FC<CurrencySelectorInterface> = () => {
+const CurrencySelector: React.FC<CurrencySelectorInterface> = ({ labels, buttonText }) => {
     const { showToast } = useContext(ToastContext);
     const currencyParams = useSearchParams();
-    const pathname = usePathname();
+    const rawPathname = usePathname();
+    const pathname = rawPathname.substring(0,1) + rawPathname.substring(4);
 
     // URL params
     const from = currencyParams.get('From');
@@ -203,7 +213,7 @@ const CurrencySelector: React.FC<CurrencySelectorInterface> = () => {
             params.set('Amount', inputValues.amount.toString())
         }
 
-        replace(`${pathname}?${params.toString()}`);
+        replace(`${rawPathname}?${params.toString()}`);
     }
 
     return (
@@ -221,7 +231,8 @@ const CurrencySelector: React.FC<CurrencySelectorInterface> = () => {
                                 htmlFor="currency-amount"
                                 className="absolute top-[-25px] left-0"
                             >
-                                Importe
+                                {/* Importe */}
+                                {labels.amount}
                             </label>
                             <input
                                 className="w-full h-[50px] outline-none border-[1px] border-[#dddddd] shadow-sm rounded-md pl-[15px] pr-[5px] text-[#141e37] focus:border-green-900"
@@ -234,7 +245,7 @@ const CurrencySelector: React.FC<CurrencySelectorInterface> = () => {
                     )
                 }
                 {
-                    renderInputField('De', 'base', inputValues.base)
+                    renderInputField(labels.base, 'base', inputValues.base)
                 }
                 <button
                     className="flex justify-center items-center bg-white w-[50px] h-[50px] rounded-full border border-[#ddd] shadow-sm rotate-90 my-[25px] transition-all active:border-green-900 md:my-0 md:rotate-0"
@@ -257,7 +268,7 @@ const CurrencySelector: React.FC<CurrencySelectorInterface> = () => {
                     </svg>
                 </button>
                 {
-                    renderInputField('a', 'target', inputValues.target)
+                    renderInputField(labels.target, 'target', inputValues.target)
                 }
             </div>
             <div className="flex justify-end">
@@ -278,9 +289,7 @@ const CurrencySelector: React.FC<CurrencySelectorInterface> = () => {
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
                         <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
                     </svg>
-                    {
-                        pathname === Routes.CONVERT ? 'Convertir' : 'Ver Gráficos'
-                    }
+                    {buttonText}
                 </button>
             </div>
         </>

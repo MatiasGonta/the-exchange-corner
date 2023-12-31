@@ -1,4 +1,5 @@
 import { CountryISOCode, countryISOList } from "@/models";
+import { useTranslations } from "next-intl";
 import Image from 'next/image';
 
 interface ExchangeRateComparisonTableInterface {
@@ -10,6 +11,8 @@ interface ExchangeRateComparisonTableInterface {
 }
 
 const ExchangeRateComparisonTable: React.FC<ExchangeRateComparisonTableInterface> = ({ fromName, toName, fromCode, toCode, exchangeRate }) => {
+    const tConvert = useTranslations('Convert');
+
     const exchangeAmounts = [1, 5, 10, 25, 50, 100, 500, 1000, 5000, 10000];
 
     return (
@@ -17,7 +20,7 @@ const ExchangeRateComparisonTable: React.FC<ExchangeRateComparisonTableInterface
             <table className="w-full">
                 <thead className="bg-[#14532d34] text-exchange-corner-light">
                     <tr className="h-[75px]">
-                        <th colSpan={2}>Convert {fromName} to {toName}</th>
+                        <th colSpan={2}>{tConvert('exchange-rate-display.table.title', { fromName, toName })}</th>
                     </tr>
                     <tr className="w-full h-[34px] border-b border-t border-[#ddd]">
                         <th>

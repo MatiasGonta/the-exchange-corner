@@ -2,13 +2,17 @@
 
 import React, { useContext, useEffect } from 'react';
 import { ToastContext } from '@/context';
-import { ErrorMessages, ToastStatus } from '@/models';
+import { ToastStatus } from '@/models';
+import Link from 'next/link';
+import { useParams, usePathname } from 'next/navigation';
 
 interface ErrorComponentInterface {
-    message: ErrorMessages;
+    message: string;
+    link: string;
 }
 
-const ErrorComponent: React.FC<ErrorComponentInterface> = ({ message }) => {
+const ErrorComponent: React.FC<ErrorComponentInterface> = ({ message, link }) => {
+    const pathname = usePathname();
     const { showToast } = useContext(ToastContext);
 
     useEffect(() => {
@@ -33,7 +37,15 @@ const ErrorComponent: React.FC<ErrorComponentInterface> = ({ message }) => {
                     />
                 </svg>
             </div>
-            <p className="text-justify text-red-400">{message}</p>
+            <div className="flex flex-col items-end text-red-400">
+                <p className="text-justify text-red-400">{message}</p>
+                <Link
+                    href={pathname}
+                    className="mt-[10px] px-[10px] py-[5px] text-red-100 bg-red-400 cursor-pointer border-2 border-red-400 rounded-lg transition-all hover:bg-red-100 hover:text-red-400"
+                >
+                    <span>{link}</span>
+                </Link>
+            </div>
         </div>
     )
 }

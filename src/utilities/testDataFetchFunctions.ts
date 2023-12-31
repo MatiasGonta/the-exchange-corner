@@ -2,20 +2,20 @@ export const fetchExchangeRate = async () => {
   // Simular la llamada a la API con un retardo de 3 segundos
   return new Promise(resolve => {
     setTimeout(() => {
-      resolve({
-        "Realtime Currency Exchange Rate": {
-          "1. From_Currency Code": "USD",
-          "2. From_Currency Name": "United States Dollar",
-          "3. To_Currency Code": "JPY",
-          "4. To_Currency Name": "Japanese Yen",
-          "5. Exchange Rate": "142.31700000",
-          "6. Last Refreshed": "2023-12-21 13:54:01",
-          "7. Time Zone": "UTC",
-          "8. Bid Price": "142.31380000",
-          "9. Ask Price": "142.31940000"
-        }
-      });
-      // resolve({});
+      // resolve({
+      //   "Realtime Currency Exchange Rate": {
+      //     "1. From_Currency Code": "USD",
+      //     "2. From_Currency Name": "United States Dollar",
+      //     "3. To_Currency Code": "JPY",
+      //     "4. To_Currency Name": "Japanese Yen",
+      //     "5. Exchange Rate": "142.31700000",
+      //     "6. Last Refreshed": "2023-12-21 13:54:01",
+      //     "7. Time Zone": "UTC",
+      //     "8. Bid Price": "142.31380000",
+      //     "9. Ask Price": "142.31940000"
+      //   }
+      // });
+      resolve({});
     }, 3000); // Retardo de 3 segundos
   });
 };
@@ -755,7 +755,7 @@ export const fetchMonthlyData = async () => {
           }
         }
       });
-    }, 3000); // Retardo de 3 segundos
+    }, 3000);
   });
 };
 
