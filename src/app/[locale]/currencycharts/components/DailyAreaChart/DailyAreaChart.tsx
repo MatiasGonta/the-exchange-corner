@@ -1,13 +1,12 @@
 import { getDailyHistoryExchange } from '@/services';
 import { AreaChart, Card, Subtitle, Title } from "@tremor/react";
-import { fetchDailyData, lastUpdatedDateFormatted } from '@/utilities';
+import { lastUpdatedDateFormatted } from '@/utilities';
 import { getTranslations } from 'next-intl/server';
 
 export default async function DailyAreaChart({ from, to }: { from: string, to: string }) {
   const tCurrencyCharts = await getTranslations('CurrencyCharts');
 
-  // const response = await getDailyHistoryExchange(from, to);
-  const response: any = await fetchDailyData();
+  const response = await getDailyHistoryExchange(from, to);;
 
   const dailyFXData = Object.entries(response["Time Series FX (Daily)"]);
 

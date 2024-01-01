@@ -1,8 +1,10 @@
+import { CountryISOCode } from ".";
+
 // CURRENCY_EXCHANGE_RATE
 export interface ExchangeRateResponse {
-  '1. From_Currency Code': string;
+  '1. From_Currency Code': CountryISOCode;
   '2. From_Currency Name': string;
-  '3. To_Currency Code': string;
+  '3. To_Currency Code': CountryISOCode;
   '4. To_Currency Name': string;
   '5. Exchange Rate': string;
   '6. Last Refreshed': string;
@@ -19,8 +21,8 @@ export interface RootDailyResponse {
 
 interface DailyMetaData {
   '1. Information': string;
-  '2. From Symbol': string;
-  '3. To Symbol': string;
+  '2. From Symbol': CountryISOCode;
+  '3. To Symbol': CountryISOCode;
   '4. Output Size': string;
   '5. Last Refreshed': string;
   '6. Time Zone': string;
@@ -34,8 +36,8 @@ export interface RootMonthlyResponse {
 
 interface MonthlyMetaData {
   '1. Information': string;
-  '2. From Symbol': string;
-  '3. To Symbol': string;
+  '2. From Symbol': CountryISOCode;
+  '3. To Symbol': CountryISOCode;
   '4. Last Refreshed': string;
   '5. Time Zone': string;
 }

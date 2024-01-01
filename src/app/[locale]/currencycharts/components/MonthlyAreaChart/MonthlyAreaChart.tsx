@@ -2,15 +2,12 @@ import React from 'react';
 import { getMonthlyHistoryExchange } from '@/services';
 import { AreaChart, Card, Tab, TabGroup, TabList, TabPanel, TabPanels, Title } from "@tremor/react";
 import { TypeWithKey } from '@/models';
-import { fetchMonthlyData } from '@/utilities';
 import { getTranslations } from 'next-intl/server';
 
 export default async function MonthlyAreaChart({ from, to }: { from: string, to: string }) {
     const tCurrencyCharts = await getTranslations('CurrencyCharts');
 
-    // const response = await getMonthlyHistoryExchange(from, to);
-
-    const response: any = await fetchMonthlyData();
+    const response = await getMonthlyHistoryExchange(from, to);
 
     const monthlyFXData = response["Time Series FX (Monthly)"];
 

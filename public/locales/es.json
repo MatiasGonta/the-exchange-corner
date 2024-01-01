@@ -17,6 +17,10 @@
         },
         "error-component": {
             "button": "Volver"
+        },
+        "errors": {
+            "SAME_CURRENCIES": "No se pueden comparar las mismas monedas. Elija códigos de divisa diferentes",
+            "NOT_VALID_CURRENCY": "No se ha podido realizar la conversion debido a un código de divisa no válido"
         }
     },
     "Convert": {
@@ -38,8 +42,14 @@
             "empty": "Aun no has agregado intercambios favoritos"
         },
         "favorite-exchange-checkbox": {
-            "checked": "Añadir conversión a favoritos",
-            "noChecked": "Eliminar conversión favorita"
+            "labels": {
+                "checked": "Añadir conversión a favoritos",
+                "noChecked": "Eliminar conversión favorita"
+            },
+            "actions": {
+                "add": "Añadido correctamente a favoritos",
+                "delete": "Eliminado correctamente de favoritos"
+            }
         },
         "popular-currencies": {
             "title": "Pares de divisas más comunes para ({fromCurrency})"

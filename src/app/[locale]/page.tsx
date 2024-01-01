@@ -32,7 +32,11 @@ export default async function Home({ searchParams }: HomeInterface) {
       base: tCommon('currency-selector.base'),
       target: tCommon('currency-selector.target')
     },
-    buttonText: tConvert('currency-selector.button')
+    buttonText: tConvert('currency-selector.button'),
+    errors: {
+      SAME_CURRENCIES: tCommon('errors.SAME_CURRENCIES'),
+      NOT_VALID_CURRENCY: tCommon('errors.NOT_VALID_CURRENCY')
+    }
   }
 
   const favoriteExchangeTranslations = {
@@ -42,8 +46,12 @@ export default async function Home({ searchParams }: HomeInterface) {
       link: tConvert('card.link')
     },
     checkboxLabels: {
-      checked: tConvert('favorite-exchange-checkbox.checked'),
-      noChecked: tConvert('favorite-exchange-checkbox.noChecked'),
+      checked: tConvert('favorite-exchange-checkbox.labels.checked'),
+      noChecked: tConvert('favorite-exchange-checkbox.labels.noChecked'),
+    },
+    checkboxActionsMessages: {
+      add: tConvert('favorite-exchange-checkbox.actions.add'),
+      delete: tConvert('favorite-exchange-checkbox.actions.delete')
     },
     emptyMessage: tConvert('favorite-exchanges.empty')
   }
@@ -60,7 +68,11 @@ export default async function Home({ searchParams }: HomeInterface) {
           <Navbar currentPath={Routes.CONVERT} />
         </article>
         <article className="flex flex-col w-full max-w-[600px] m-[75px] px-[25px] md:px-0">
-          <CurrencySelector labels={currencySelectorTranslations.labels} buttonText={currencySelectorTranslations.buttonText} />
+          <CurrencySelector
+            labels={currencySelectorTranslations.labels}
+            buttonText={currencySelectorTranslations.buttonText}
+            errors={currencySelectorTranslations.errors}
+          />
           {
             paramsCheck &&
             <ErrorBoundary fallback={<ErrorComponent message={CURRENCY_EXCHANGE_RATE_ERROR} link={errorComponentLink} />}>
@@ -83,6 +95,7 @@ export default async function Home({ searchParams }: HomeInterface) {
               title={favoriteExchangeTranslations.title}
               card={favoriteExchangeTranslations.card}
               checkboxLabels={favoriteExchangeTranslations.checkboxLabels}
+              checkboxActionsMessages={favoriteExchangeTranslations.checkboxActionsMessages}
               emptyMessage={favoriteExchangeTranslations.emptyMessage}
             />
           </article>

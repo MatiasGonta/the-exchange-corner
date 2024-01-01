@@ -1,16 +1,20 @@
 'use client';
 
-import { CountryISOCode } from '@/models';
+import { ToastContext } from '@/context';
+import { CountryISOCode, ToastStatus } from '@/models';
 import { getLocalStorage, setLocalStorage } from '@/utilities';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 interface FavoriteExchangeCheckboxInterface {
     from: CountryISOCode;
     to: CountryISOCode;
     labels: { checked: string, noChecked: string };
+    actionMessages: { add: string, delete: string };
 }
 
-const FavoriteExchangeCheckbox: React.FC<FavoriteExchangeCheckboxInterface> = ({ from, to, labels }) => {
+const FavoriteExchangeCheckbox: React.FC<FavoriteExchangeCheckboxInterface> = ({ from, to, labels, actionMessages }) => {
+    const { showToast } = useContext(ToastContext);
+
     const favoriteExchangesRaw = getLocalStorage('favoriteExchanges');
     const favoriteExchanges: [{ from: CountryISOCode, to: CountryISOCode }] = favoriteExchangesRaw
         ? JSON.parse(favoriteExchangesRaw)
@@ -42,6 +46,8 @@ const FavoriteExchangeCheckbox: React.FC<FavoriteExchangeCheckboxInterface> = ({
         }
 
         setLocalStorage('favoriteExchanges', newFavoriteExchanges);
+        
+        showToast(ToastStatus.SUCCESS, !isChecked ? actionMessages.add : actionMessages.delete);
     }
 
     return (
@@ -73,7 +79,7 @@ const FavoriteExchangeCheckbox: React.FC<FavoriteExchangeCheckboxInterface> = ({
                     htmlFor="favorite"
                     className="absolute opacity-0 invisible z-10 w-auto h-0 bg-[#555] text-[10px] text-white text-center rounded-md top-[125%] left-[-145%] transition-opacity group-hover:opacity-100 group-hover:w-[110px] group-hover:h-auto group-hover:p-[5px] group-hover:visible before:content-[''] before:z-[-1] before:absolute before:top-[-2px] before:left-[47px] before:w-[15px] before:h-[15px] before:rotate-45 before:bg-[#555]"
                 >
-                    {isChecked ? labels.checked : labels.noChecked}
+                    {!isChecked ? labels.checked : labels.noChecked}
                 </label>
             </div>
         </div>

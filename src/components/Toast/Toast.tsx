@@ -74,7 +74,7 @@ export default function Toast() {
         <div className={`fixed top-[25px] right-[25px] flex flex-col transition-all z-toast ${toastConfig.show ? 'w-full h-auto opacity-1' : 'w-0 h-0 opacity-0'} max-w-[400px] text-gray-500 bg-white rounded-lg shadow`}>
             <div className="flex items-center w-auto h-auto p-4">
                 {selectedStatusIcon}
-                <div className="ms-3 text-sm font-normal">{toastConfig.text}</div>
+                <p className="w-full ms-3 text-sm font-normal">{toastConfig.text}</p>
                 <button
                     type="button"
                     className="bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8"

@@ -16,10 +16,11 @@ interface FavoriteExchangesInterface {
   title: string;
   card: Card;
   checkboxLabels: { checked: string, noChecked: string };
+  checkboxActionsMessages: { add: string, delete: string };
   emptyMessage: string;
 }
 
-const FavoriteExchanges: React.FC<FavoriteExchangesInterface> = ({ title, card, checkboxLabels, emptyMessage }) => {
+const FavoriteExchanges: React.FC<FavoriteExchangesInterface> = ({ title, card, checkboxLabels, checkboxActionsMessages, emptyMessage }) => {
   const favoriteExchangesRaw = getLocalStorage('favoriteExchanges');
   const favoriteExchanges: [{ from: CountryISOCode, to: CountryISOCode }] = favoriteExchangesRaw ? JSON.parse(favoriteExchangesRaw) : [];
 
@@ -35,7 +36,11 @@ const FavoriteExchanges: React.FC<FavoriteExchangesInterface> = ({ title, card, 
                 className="relative flex flex-col justify-center items-center text-[18px] text-exchange-corner-light font-bold bg-white w-[200px] h-fit p-[10px] border border-[#ddd] border-t-[5px] border-t-green-900 rounded-lg shadow-lg"
               >
                 <div className="self-end">
-                  <FavoriteExchangeCheckbox from={exchange.from} to={exchange.to} labels={checkboxLabels}
+                  <FavoriteExchangeCheckbox
+                    from={exchange.from}
+                    to={exchange.to}
+                    labels={checkboxLabels}
+                    actionMessages={checkboxActionsMessages}
                   />
                 </div>
                 <div className="flex justify-between items-center w-[125px] h-full">

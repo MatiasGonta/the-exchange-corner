@@ -1,6 +1,6 @@
 import React from 'react';
 import { getCurrentExchange } from '@/services';
-import { fetchExchangeRate, lastUpdatedDateFormatted } from '@/utilities';
+import { lastUpdatedDateFormatted } from '@/utilities';
 import { ExchangeRateComparisonTable } from './ExchangeRateComparisonTable';
 import { FavoriteExchangeCheckbox } from '../FavoriteExchangeCheckbox';
 import { CountryISOCode, TypeWithKey } from '@/models';
@@ -15,14 +15,18 @@ interface ExchangeRateDisplayInterface {
 const ExchangeRateDisplay = async ({ from, to, amount = '1' }: ExchangeRateDisplayInterface) => {
     const tConvert = await getTranslations('Convert');
     
-    const checkboxLabels = {
-        checked: tConvert('favorite-exchange-checkbox.checked'),
-        noChecked: tConvert('favorite-exchange-checkbox.noChecked'),
+    const favoriteCheckboxTranslations = {
+        labels: {
+            checked: tConvert('favorite-exchange-checkbox.labels.checked'),
+            noChecked: tConvert('favorite-exchange-checkbox.labels.noChecked')
+        },
+        actionMessages: {
+            add: tConvert('favorite-exchange-checkbox.actions.add'),
+            delete: tConvert('favorite-exchange-checkbox.actions.delete')
+        }
     };
 
-    // const conversion = await getCurrentExchange(from, to);
-    const response: any = await fetchExchangeRate();
-    const conversion = response['Realtime Currency Exchange Rate'];
+    const conversion = await getCurrentExchange(from, to);
 
     const currencyCodes: TypeWithKey<CountryISOCode> = {
         from: conversion['1. From_Currency Code'],
@@ -44,7 +48,12 @@ const ExchangeRateDisplay = async ({ from, to, amount = '1' }: ExchangeRateDispl
         <>
             <div className="relative flex flex-col w-full mb-[50px]">
                 <div className="absolute top-[20px] right-0">
-                    <FavoriteExchangeCheckbox from={currencyCodes.from} to={currencyCodes.to} labels={checkboxLabels} />
+                    <FavoriteExchangeCheckbox
+                        from={currencyCodes.from}
+                        to={currencyCodes.to}
+                        labels={favoriteCheckboxTranslations.labels}
+                        actionMessages={favoriteCheckboxTranslations.actionMessages}
+                    />
                 </div>
                 <div className="flex flex-col my-[20px] text-[16px]">
                     <span className="font-semibold text-exchange-corner-light">

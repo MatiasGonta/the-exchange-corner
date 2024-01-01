@@ -17,6 +17,10 @@
         },
         "error-component": {
             "button": "Back"
+        },
+        "errors": {
+            "SAME_CURRENCIES": "You can't compare the same currencies. Choose different currency codes",
+            "NOT_VALID_CURRENCY": "Conversion could not be performed due to invalid currency code"
         }
     },
     "Convert": {
@@ -38,8 +42,14 @@
             "empty": "You haven't added favorite exchanges yet"
         },
         "favorite-exchange-checkbox": {
-            "checked": "Add conversion to favorites",
-            "noChecked": "Delete favorite conversion"
+            "labels": {
+                "checked": "Add conversion to favorites",
+                "noChecked": "Delete favorite conversion"  
+            },
+            "actions" : {
+                "add": "Successfully added to favorites",
+                "delete": "Successfully removed from favorites"
+            }
         },
         "popular-currencies": {
             "title": "Most common currency pairs for ({fromCurrency})"

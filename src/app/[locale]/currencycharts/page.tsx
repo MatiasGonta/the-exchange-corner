@@ -35,7 +35,11 @@ const CurrencyCharts = ({ searchParams }: CurrencyChartsInterface) => {
       base: tCommon('currency-selector.base'),
       target: tCommon('currency-selector.target')
     },
-    buttonText: tCurrencyCharts('currency-selector.button')
+    buttonText: tCurrencyCharts('currency-selector.button'),
+    errors: {
+      SAME_CURRENCIES: tCommon('errors.SAME_CURRENCIES'),
+      NOT_VALID_CURRENCY: tCommon('errors.NOT_VALID_CURRENCY')
+    }
   }
 
   // Handle params
@@ -50,7 +54,11 @@ const CurrencyCharts = ({ searchParams }: CurrencyChartsInterface) => {
           <Navbar currentPath={Routes.CURRENCY_CHARTS} />
         </article>
         <article className="flex flex-col w-full max-w-[600px] m-[75px]">
-          <CurrencySelector labels={currencySelectorTranslations.labels} buttonText={currencySelectorTranslations.buttonText} />
+          <CurrencySelector
+            labels={currencySelectorTranslations.labels}
+            buttonText={currencySelectorTranslations.buttonText}
+            errors={currencySelectorTranslations.errors}
+          />
         </article>
       </section>
       <section className="mt-[-200px] w-full max-w-[768px] mx-auto">

@@ -10,23 +10,29 @@ import { FlagIconSkeleton } from '@/components';
 import Image from 'next/image';
 
 interface InputLabels {
-    amount?: string,
-    base: string,
-    target: string,
+    amount?: string;
+    base: string;
+    target: string;
+}
+
+interface Errors {
+    SAME_CURRENCIES: string;
+    NOT_VALID_CURRENCY: string;
 }
 
 interface CurrencySelectorInterface {
-    labels: InputLabels,
-    buttonText: string
+    labels: InputLabels;
+    buttonText: string;
+    errors: Errors;
 }
 
 type CurrencyState = {
-    base: string,
-    target: string,
-    amount: string,
+    base: string;
+    target: string;
+    amount: string;
 }
 
-const CurrencySelector: React.FC<CurrencySelectorInterface> = ({ labels, buttonText }) => {
+const CurrencySelector: React.FC<CurrencySelectorInterface> = ({ labels, buttonText, errors }) => {
     const { showToast } = useContext(ToastContext);
     const currencyParams = useSearchParams();
     const rawPathname = usePathname();
@@ -196,12 +202,12 @@ const CurrencySelector: React.FC<CurrencySelectorInterface> = ({ labels, buttonT
 
     const handleCurrencyParams = () => {
         if (inputValues.base === inputValues.target) {
-            showToast(ToastStatus.ALERT, 'No se pueden comparar las mismas monedas. Elija códigos de divisa diferentes')
+            showToast(ToastStatus.ALERT, errors.SAME_CURRENCIES)
             return;
         }
 
         if (inputValues.base.length !== 3 || inputValues.base in countryISOArr || inputValues.target.length !== 3 || inputValues.target in countryISOArr) {
-            showToast(ToastStatus.ALERT, 'No se ha podido realizar la conversion debido a un código de divisa no válido')
+            showToast(ToastStatus.ALERT, errors.NOT_VALID_CURRENCY)
             return;
         }
 
