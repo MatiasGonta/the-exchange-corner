@@ -4,6 +4,7 @@ export * from './ErrorComponent';
 export * from './ExchangeRateDisplay';
 export * from './FavoriteExchangeCheckbox';
 export * from './FavoriteExchanges';
+export * from './LangSwitch';
 export * from './Navbar';
 export * from './PopularCurrencies';
 export * from './Toast';

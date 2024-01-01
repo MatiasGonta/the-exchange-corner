@@ -13,9 +13,9 @@ const Navbar: React.FC<NavbarInterface> = ({ currentPath }) => {
 
     return (
         <nav className="flex w-full h-[50px] text-[16px] transition-all">
-            <div className={`w-1/2 h-ful rounded-tl-xl ${currentPath === Routes.CONVERT ? "text-green-900 bg-slate-50 font-bold" : "bg-[#14532d34]"}`}>
+            <div className={`w-1/2 h-ful rounded-tl-xl ${currentPath === Routes.CONVERT ? "text-green-900 bg-slate-50 font-bold" : "bg-exchange-corner-green-light"}`}>
                 <Link
-                    href={Routes.CONVERT}
+                    href={`/${locale}${Routes.CONVERT}`}
                     className="w-full h-full flex justify-center items-center"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" height="25" width="25" viewBox="0 0 48 48">
@@ -33,9 +33,9 @@ const Navbar: React.FC<NavbarInterface> = ({ currentPath }) => {
                     <span className="ml-[10px]">{tCommon('links.convert')}</span>
                 </Link>
             </div>
-            <div className={`w-1/2 h-ful rounded-tr-xl ${currentPath === Routes.CURRENCY_CHARTS ? "text-green-900 bg-slate-50 font-bold" : "bg-[#14532d34]"}`}>
+            <div className={`w-1/2 h-ful rounded-tr-xl ${currentPath === Routes.CURRENCY_CHARTS ? "text-green-900 bg-slate-50 font-bold" : "bg-exchange-corner-green-light"}`}>
                 <Link
-                    href={locale + Routes.CURRENCY_CHARTS}
+                    href={`/${locale}${Routes.CURRENCY_CHARTS}`}
                     className="w-full h-full flex justify-center items-center"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" height="25" width="25" viewBox="0 0 511.999 511.999" xmlSpace="preserve">

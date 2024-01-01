@@ -17,6 +17,7 @@ const config: Config = {
         // light mode
         'exchange-corner': '#202020',
         'exchange-corner-light': '#303030',
+        'exchange-corner-green-light': '#14532d34',
         tremor: {
           brand: {
             DEFAULT: colors.green[900],

@@ -18,7 +18,7 @@ const ExchangeRateComparisonTable: React.FC<ExchangeRateComparisonTableInterface
     return (
         <div className="w-full text-center shadow-lg rounded-xl pb-[15px] overflow-hidden">
             <table className="w-full">
-                <thead className="bg-[#14532d34] text-exchange-corner-light">
+                <thead className="bg-exchange-corner-green-light text-exchange-corner-light">
                     <tr className="h-[75px]">
                         <th colSpan={2}>{tConvert('exchange-rate-display.table.title', { fromName, toName })}</th>
                     </tr>

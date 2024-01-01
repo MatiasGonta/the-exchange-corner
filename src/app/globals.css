@@ -3,6 +3,13 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+:root {
+  --exchange-corner: 0, 0, 0;
+  --exchange-corner-light: 0, 0, 0;
+  --exchange-corner-green: #14532d;
+  --exchange-corner-green-light: #14532d34;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +20,7 @@
 *::-webkit-scrollbar-track {
   border: 5px solid white;
   border-radius: 10px;
-	background-color: #14532d34;
+	background-color: var(--exchange-corner-green-light);
 }
 
 *::-webkit-scrollbar {
@@ -23,7 +30,7 @@
 *::-webkit-scrollbar-thumb {
   border-top: 3px solid transparent;
   border-bottom: 3px solid transparent;
-	background-color: #14532d;
+	background-color: var(--exchange-corner-green);
   border: 2px solid white;
 	border-radius: 5px;
 }
