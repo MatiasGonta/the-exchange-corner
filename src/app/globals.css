@@ -10,6 +10,10 @@
   --exchange-corner-green-light: #14532d34;
 }
 
+html {
+  font-family: var(--font-inter);
+}
+
 * {
   margin: 0;
   padding: 0;

@@ -29,7 +29,7 @@ const FavoriteExchanges: React.FC<FavoriteExchangesInterface> = ({ title, card, 
       <h3 className="text-green-900 text-[25px] font-bold">{title}</h3>
       <div className="max-w-[200px] min-h-[200px] mt-[25px] grid gap-[20px] grid-cols-1 grid-rows-auto rounded-xl sm:grid-cols-2 sm:max-w-[415px] md:grid-cols-3 md:max-w-[640px]">
         {
-          favoriteExchanges
+          favoriteExchanges && favoriteExchanges.length > 0
             ? favoriteExchanges.map((exchange, index) => (
               <div
                 key={index}

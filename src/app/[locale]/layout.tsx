@@ -9,7 +9,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import '../globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+});
 
 export async function generateMetadata(): Promise<Metadata> {
   const tCommon = await getTranslations('Common');
